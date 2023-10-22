@@ -1,25 +1,15 @@
+list1 = [1, 2, [4, 5], [6, [7]], 8]
 
-list1 =[1, 2, [4, 5], [6, [7]], 8]
-newList =[]
-def flatten(lst) :
+def flatten(lst):
+    newList = []
+
     for x in lst:
         if isinstance(x, list):
-            flatten(x)
+            newList.extend(flatten(x))
         else:
             newList.append(x)
-            
-flatten(list1)
-print(newList)
 
+    return newList
 
-
-
-
-
-
-
-
-
-
-
-
+flattened_list = flatten(list1) 
+print(flattened_list)
