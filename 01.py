@@ -2,16 +2,6 @@ import sys
 num = int(input())
 q = 0
 
-if num == 2 or num == -2: # need to be parsed separately
-    q = 1
-    print(q)
-    sys.exit()
-
-if num % 4 == 0: # for numbers that are powers of two, there is always exactly one unit
-        q = 1
-        print(q)
-        sys.exit()
-
 if num < 0:
     num = abs(num)
     firstUnit = False
