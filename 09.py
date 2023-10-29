@@ -1,8 +1,7 @@
-
 def format_table(benchmarks, algos, results):
     max_benchmark_len = max(len(b) for b in benchmarks)
-    header = f"| Benchmark{' ' * (max_benchmark_len - 9)} | quick sort | merge sort | bubble sort |"
-    separator = "+{'-' * (max_benchmark_len + 14)}+------------+------------+------------+"
+    header = f"| Benchmark{' ' * (max_benchmark_len - 9)} | quick sort | merge sort | bubble sort |\n\
+|{'-' * (max_benchmark_len + 2)}|------------|------------|-------------|"
 
     print(header)
 
