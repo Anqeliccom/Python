@@ -1,31 +1,27 @@
-def deprecated(since=None, will_be_removed=None):
+from functools import partial
+def deprecated(func = None, since=None, will_be_removed=None):
+    if func is None:
+            return partial(deprecated, since = since, will_be_removed = will_be_removed)
+        
+    def deprecated_func(*args, **kwargs):
+        
+        name = func.__name__
+        
+        message = f"Warning: function {name} is deprecated"
+        if since:
+            message += f" since version {since}"
+        
+        message += ". It will be removed in "
+        if will_be_removed:
+            message += f"version {will_be_removed}."
+        else:
+            message += "future versions."
+        
+        print(message)
+        
+        return func(*args, **kwargs)
 
-    if callable(since):
-        func = since
-        since = None
-        return deprecated()(func)
-
-    def decorator(func):
-        def deprecated_func(*args, **kwargs):
-            name = func.__name__
-            
-            string = f"Warning: function {name} is deprecated"
-            if since:
-                string += f" since version {since}"
-            
-            string += ". It will be removed in "
-            if will_be_removed:
-                string += f"version {will_be_removed}."
-            else:
-                string += f"future versions."
-            
-            print(string)
-            
-            return func(*args, **kwargs)
-
-        return deprecated_func
-
-    return decorator
+    return deprecated_func
 
 @deprecated
 def foo():
