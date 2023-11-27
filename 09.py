@@ -6,6 +6,7 @@ def format_table(benchmarks, algos, results):
     max_result_lens = [max(len(str(results[i][j])) for i in range(num_benchmarks)) for j in range(num_algos)]
     
     max_space_between_algos_results = [max(max_result_lens[i], len(algo)) for i, algo in enumerate(algos)]
+    max_space_between_benchmark_title = max(max_benchmark_len, 9)
 
 
     header = f"| Benchmark{' ' * (max_benchmark_len - 9)} |"
@@ -13,18 +14,18 @@ def format_table(benchmarks, algos, results):
         header += f" {algo}{' ' * (max_len - len(algo))} |"
     print(header)
     
-    header_line = f"|{'-' * (max_benchmark_len + 2)}|"
+    header_line = f"|{'-' * (max_space_between_benchmark_title + 2)}|"
     for max_len in max_space_between_algos_results:
         header_line += f"{'-' * (max_len + 2)}|"
     print(header_line)
     
     for i in range(num_benchmarks):
         benchmark = benchmarks[i]
-        row = f"| {benchmark}{' ' * (max_benchmark_len - len(benchmark))} |"
+        row = f"| {benchmark}{' ' * (max_space_between_benchmark_title - len(benchmark))} |"
         for j in range(num_algos):
             row += f" {results[i][j]}{' ' * (max_space_between_algos_results[j] - len(str(results[i][j])))} |"
         print(row)
 
-format_table(["best case", "worst cases", "average cases"],
+format_table(["best cases", "worst cases", "average cases"],
              ["quick sort", "merge sort", "bubble sorted"],
              [[1.23, 1.56, 2.0], [3.3, 2.966, 3.9], [2.0, 2.1, 2.2]])
