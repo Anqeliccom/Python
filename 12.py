@@ -1,7 +1,6 @@
 def cycle(iterable):
     while True:
-        for i in iterable:
-            yield i
+        yield from iterable
 
 def take(iterable, n):
     res = []
@@ -11,8 +10,7 @@ def take(iterable, n):
     
 def chain(*iterables):
     for iterable in iterables:
-        for i in iterable:
-            yield i
+        yield from iterable
 
 print(take(cycle([1, 2, 3]), 10))
 
